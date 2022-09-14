@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ButtonLimpar from './components/ButtonLimpar'
 import ListaMonstros from './components/ListaMonstros'
 
 function App() {
@@ -10,10 +11,9 @@ function App() {
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response => response.json())
-    .then((dadosAPI) => setDados(dadosAPI.slice(0, 5)));
+      .then(response => response.json())
+      .then(dadosAPI => setDados(dadosAPI.slice(0, 5)))
   }, [])
-
 
   return (
     <main>
@@ -22,9 +22,7 @@ function App() {
 
         <ListaMonstros dados={dados} />
 
-        <button className="btn-azul" type="button" onClick={apagarDados}>
-          limpar monstros
-        </button>
+        <ButtonLimpar apagarDados={apagarDados} />
       </section>
     </main>
   )

@@ -1,26 +1,15 @@
-import { Fragment } from "react";
+import Monstro from "./Monstro";
 
 const ListaMonstros = (props) => {
+  const dados = props.dados;
 
-   const dados = props.dados
-
-   return (
-      <Fragment>
-      {
-         dados.map(object => {
-         return (
-           <article key={object.id} className="monstros">
-             <img src={`https://robohash.org/${object.id}?set=set2`} alt="monstro" />
-             <div>
-               <h2>{object.name}</h2>
-               <p>{object.email}</p>
-             </div>
-           </article>
-         )
-       })
-      }
-      </Fragment>
-   );
+  return (
+    <>
+      {dados.map((objeto) => {
+        return <Monstro key={objeto.id} monstroUnico={objeto} />;
+      })}
+    </>
+  );
 };
 
 export default ListaMonstros;
