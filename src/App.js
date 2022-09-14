@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ListaMonstros from './components/ListaMonstros'
 
 function App() {
   const [dados, setDados] = useState([])
@@ -19,17 +20,7 @@ function App() {
       <section className="container">
         <h1>{dados.length} monstros</h1>
 
-        {dados.map(object => {
-          return (
-            <article key={object.id} className="monstros">
-              <img src={`https://robohash.org/${object.id}?set=set2`} alt="monstro" />
-              <div>
-                <h2>{object.name}</h2>
-                <p>{object.email}</p>
-              </div>
-            </article>
-          )
-        })}
+        <ListaMonstros dados={dados} />
 
         <button className="btn-azul" type="button" onClick={apagarDados}>
           limpar monstros
