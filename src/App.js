@@ -1,27 +1,42 @@
-import dados from './dados/dadosFake'
+import { useEffect, useState } from 'react'
 
 function App() {
-  consta [dadosFake, setDadosFake] = useState();
+  const [dados, setDados] = useState([])
+
+  const apagarDados = () => {
+    setDados([])
+  }
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then((dadosAPI) => setDados(dadosAPI.slice(0, 5)));
+  }, [])
+
 
   return (
     <main>
       <section className="container">
-        <h1>monstros</h1>
-        
-        <article className="monstros">
-          <img src="https://robohash.org/1?set=set2" alt="monstro" />
-          <div>
-            <h2>nome</h2>
-            <p>email</p>
-          </div>
-        </article>
+        <h1>{dados.length} monstros</h1>
 
-        <button className="btn-azul" type="button">
+        {dados.map(object => {
+          return (
+            <article key={object.id} className="monstros">
+              <img src={`https://robohash.org/${object.id}?set=set2`} alt="monstro" />
+              <div>
+                <h2>{object.name}</h2>
+                <p>{object.email}</p>
+              </div>
+            </article>
+          )
+        })}
+
+        <button className="btn-azul" type="button" onClick={apagarDados}>
           limpar monstros
         </button>
       </section>
     </main>
-  );
+  )
 }
 
-export default App;
+export default App
